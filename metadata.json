@@ -1,0 +1,6 @@
+{
+  "name": "Questia AI",
+  "description": "Gerador de questões inteligente alimentado pelo Google Gemini. Crie quizzes personalizados em segundos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
