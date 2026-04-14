@@ -6,10 +6,17 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
 export async function generateQuestions(params: GenerationParams): Promise<Question[]> {
   const { topic, count, difficulty, type, language } = params;
 
-  const prompt = `Gere ${count} questões de ${type} sobre o seguinte tópico ou texto: "${topic}". 
+  const prompt = `Você é um especialista em criação de questões de concursos e exames. 
+  Gere ${count} questões do tipo "${type}" baseadas estritamente no seguinte tópico ou texto: "${topic}". 
   Nível de dificuldade: ${difficulty}. 
   Idioma: ${language}.
-  Para cada questão, forneça 4 opções (se for múltipla escolha) ou 2 opções (se for verdadeiro/falso), a resposta correta e uma breve explicação.`;
+
+  REGRAS CRÍTICAS:
+  1. Se o tópico for um texto longo, extraia informações relevantes para criar as questões.
+  2. Para questões de múltipla escolha, forneça exatamente 4 opções plausíveis.
+  3. A "correctAnswer" DEVE ser idêntica a uma das strings dentro do array "options".
+  4. A "explanation" deve ser didática, explicando por que a alternativa está correta e, se possível, por que as outras estão incorretas.
+  5. Mantenha um tom profissional e formal, típico de bancas de concurso.`;
 
   try {
     const response = await ai.models.generateContent({

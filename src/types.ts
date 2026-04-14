@@ -16,3 +16,10 @@ export interface GenerationParams {
   type: QuestionType;
   language: string;
 }
+
+export interface UserAnswer {
+  questionId: string;
+  selectedOption: string;
+  isCorrect: boolean;
+  isSubmitted: boolean;
+}
